@@ -4,12 +4,6 @@ import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import yorkie, { Client, Document } from "@yorkie-js/sdk";
 
-/**
- * React‑Three‑Fiber + Yorkie Rubik's‑Cube Scene (client/doc refs)
- *
- * <RubiksCube /> 렌더링 시 실시간 공유 큐브가 동작합니다.
- */
-
 const COLOR_HEX = [
   0xffff00, 0xff0000, 0x00ff00, 0xffffff, 0xff8000, 0x0000ff,
 ] as const;
@@ -43,7 +37,6 @@ interface Root {
   lastRot?: LastRot;
 }
 
-/* ── 단일 큐브 ── */
 function Cubie({
   position,
   refArray,
@@ -63,7 +56,6 @@ function Cubie({
   );
 }
 
-/* ── 메인 씬 ── */
 function CubeScene() {
   const { camera, gl, scene } = useThree();
 
@@ -76,7 +68,6 @@ function CubeScene() {
   const ray = useMemo(() => new THREE.Raycaster(), []);
   const mouse = useRef(new THREE.Vector2());
 
-  /* Light */
   useEffect(() => {
     scene.background = new THREE.Color(0xffffff);
     scene.add(new THREE.AmbientLight(0xffffff, 0.4));
@@ -85,7 +76,6 @@ function CubeScene() {
     scene.add(dl);
   }, [scene]);
 
-  /* Yorkie */
   useEffect(() => {
     let mounted = true;
     (async () => {
